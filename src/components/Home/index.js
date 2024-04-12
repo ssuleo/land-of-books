@@ -1,6 +1,6 @@
 import Footer from "../Footer";
 import BookCard from "../BookCard";
-import HeroSection from "../HeroSection";
+import Body from "../Body";
 import Navbar from "../Navbar";
 import React from "react";
 
@@ -8,7 +8,7 @@ const home = () => {
   return (
     <>
       <Navbar />
-      <HeroSection />
+      <Body />
       <BookCard/>
       <Footer/>
     </>

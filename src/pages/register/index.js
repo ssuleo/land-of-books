@@ -1,28 +1,21 @@
-import React from "react";
 import {
-  Flex,
   Box,
+  Button,
+  Flex,
   FormControl,
   FormLabel,
-  Input,
-  Checkbox,
-  Button,
-  Heading,
   Image,
+  Input,
   useColorModeValue,
-  Text,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
-import { Formik, Form, Field } from "formik";
-import { useRouter } from "next/router";
+import { Field, Form, Formik } from "formik";
+import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
-export default function SignIn() {
+import { useRouter } from "next/router";
+export default function SignUp() {
   const router = useRouter();
   const toast = useToast();
-
-  const handleSignUpClick = () => {
-    router.push("/register");
-  };
 
   const handleSubmit = async (values, actions) => {
     const { users_name, email, password } = values; 
@@ -30,7 +23,7 @@ export default function SignIn() {
     try {
       const response = await axios({
         method: 'post',
-        url: "http://localhost/land-of-books/backend/login.php",
+        url: "http://localhost/land-of-books/backend/register.php",
         data: {
           users_name,
           email,
@@ -40,47 +33,49 @@ export default function SignIn() {
           "Content-Type": "application/json", 
         },
       });
-
       const data = response.data;
-      if (data.message === "Success") {
-        router.push("/adminPanel");
+      if (data.message === "User successfully registered.") {
+        toast({
+          title: "Başarılı",
+          description: "Kullanıcı başarıyla kaydedildi.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        router.push("/login");
       } else {
         toast({
-          title: "An error occurred.",
-          description: data.error || "An unknown error occurred.",
+          title: "Hata",
+          description:data.error,
           status: "error",
-          duration: 9000,
+          duration: 5000,
           isClosable: true,
         });
       }
     } catch (error) {
-      console.error("Error during login:", error);
       toast({
-        title: "An error occurred.",
-        description: error.response && error.response.data.error
-          ? error.response.data.error
-          : "Network error, please try again.",
+        title: "Bir hata oluştu",
+        description: error.data?.error || "Sunucuya bağlanılamıyor.",
         status: "error",
-        duration: 9000,
+        duration: 5000,
         isClosable: true,
       });
     } finally {
       actions.setSubmitting(false);
     }
   };
-
   return (
     <Flex
-      minH="100vh"
-      align="center"
-      justify="center"
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
       direction={{ base: "column", md: "row" }}
       bg={useColorModeValue("gray.50", "gray.800")}
       p={5}
     >
       <Box
         w={{ base: "90%", md: "600px" }}
-        h="550px"
+        h="600px"
         rounded={"lg"}
         bg={useColorModeValue("white", "gray.700")}
         boxShadow={"lg"}
@@ -94,7 +89,7 @@ export default function SignIn() {
 
         <Formik
           initialValues={{ email: "", password: "", users_name: "" }}
-          onSubmit={handleSubmit}
+         onSubmit={handleSubmit}
         >
           {(props) => (
             <Form>
@@ -102,7 +97,7 @@ export default function SignIn() {
                 {({ field }) => (
                   <FormControl id="users_name" mt={4}>
                     <FormLabel>User Name</FormLabel>
-                    <Input {...field} type="text" />
+                    <Input {...field} type="users_name" />
                   </FormControl>
                 )}
               </Field>
@@ -122,17 +117,6 @@ export default function SignIn() {
                   </FormControl>
                 )}
               </Field>
-              <Flex mt="10px">
-                <Text>Not a member?</Text>
-                <Button
-                  variant="link"
-                  colorScheme="blue"
-                  ml="10px"
-                  onClick={handleSignUpClick}
-                >
-                  Sign Up
-                </Button>
-              </Flex>
 
               <Button
                 mt={4}
@@ -142,14 +126,20 @@ export default function SignIn() {
                 isLoading={props.isSubmitting}
                 type="submit"
               >
-                Sign in
+                Sign Up
               </Button>
-              <Flex mt={4} align="center" justify="space-between">
-                <Checkbox>Remember me</Checkbox>
-                <Button variant="link" colorScheme="blue">
-                  Forgot password?
-                </Button>
-              </Flex>
+              <Button
+                mt={4}
+                w="full"
+                leftIcon={<FcGoogle />}
+                variant="outline"
+                colorScheme="gray"
+                onClick={() => {
+                  alert("Google ile giriş yap işlemi henüz desteklenmiyor.");
+                }}
+              >
+                Google ile Kayıt Ol
+              </Button>
             </Form>
           )}
         </Formik>
