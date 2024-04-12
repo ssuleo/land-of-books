@@ -9,7 +9,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 
-const HeroSection = () => {
+const Body = () => {
   return (
     <Center minHeight="100vh">
       <Flex
@@ -30,7 +30,7 @@ const HeroSection = () => {
             You can get that book by exchanging the books you have with the
             books you want to read !
           </Text>
-          <Button size="lg" colorScheme="teal" borderRadius="md">
+          <Button size="lg" bgColor="#29304E" color="white"borderRadius="md">
             Get Started
           </Button>
         </Box>
@@ -49,4 +49,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default Body;

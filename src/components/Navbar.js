@@ -8,7 +8,7 @@ import {
   Button,
   useColorModeValue,
   Heading,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
@@ -20,11 +20,14 @@ const Navbar = () => {
   const handleLoginClick = () => {
     router.push("/login");
   };
+  const handleSignUpClick =()=>{
+    router.push("/signUp");
+  }
 
   return (
     <Box bg={bgColor} px={6} py={2} boxShadow="sm">
       <Flex justifyContent="space-between" alignItems="center">
-<Image src="images/logo2.png" w="150px" h="100px"></Image>
+        <Image src="images/logoiki.png" w="150px" h="100px"></Image>
         <InputGroup w="800px">
           <InputRightElement
             pointerEvents="none"
@@ -32,9 +35,15 @@ const Navbar = () => {
           />
           <Input placeholder="Title, author, keyword, ISBN, user" />
         </InputGroup>
-        <Button colorScheme="blue" onClick={handleLoginClick}>
+        <Flex>
+        <Button bgColor="#20304E" color="white"onClick={handleLoginClick}>
           Log in
         </Button>
+        <Button bgColor="#20304E" color="white"ml="10px" onClick={handleSignUpClick}>
+          Sign Up
+        </Button>
+        </Flex>
+
       </Flex>
     </Box>
   );
