@@ -1,21 +1,10 @@
 <?php
+require_once "connectDatabase.php";
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-$host = 'localhost';
-$dbname = 'land_of_books'; 
-$username = 'root'; 
-$password = 'Sulee2001.'; 
-
 session_start();
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("ERROR: Could not connect. " . $e->getMessage());
-}
 
 $data = json_decode(file_get_contents('php://input'), true);
 

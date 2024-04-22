@@ -26,11 +26,11 @@ const Body = () => {
           <Heading mb={4} fontSize={{ base: "4xl", md: "5xl", lg: "5xl" }}>
             You are in the right place to exchange the books you want to read{" "}
           </Heading>
-          <Text fontSize={{ base: "md", lg: "lg" }} color="gray.600" mb={8}>
+         <Text fontSize={{ base: "md", lg: "lg" }} color="gray.600" mb={8}>
             You can get that book by exchanging the books you have with the
             books you want to read !
           </Text>
-          <Button size="lg" bgColor="#29304E" color="white"borderRadius="md">
+          <Button size="lg" bgColor="#29304E" color="white" borderRadius="md">
             Get Started
           </Button>
         </Box>

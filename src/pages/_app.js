@@ -1,9 +1,12 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import {NavbarProvider }from "../context/NavbarContext";
 
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <NavbarProvider>
+        <Component {...pageProps} />
+      </NavbarProvider>
     </ChakraProvider>
   );
 }

@@ -21,7 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/pages/login/index.js"  ],
+, "src/pages/login/index.js", "src/pages/register/index.js", "src/pages/adminPanel/index.js"  ],
   "exclude": [
     "node_modules"
   ]

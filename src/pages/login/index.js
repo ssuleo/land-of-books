@@ -16,7 +16,9 @@ import {
 import { Formik, Form, Field } from "formik";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { useNavbar } from '../../context/NavbarContext';
 export default function SignIn() {
+  const { login } = useNavbar(); 
   const router = useRouter();
   const toast = useToast();
 
@@ -43,6 +45,7 @@ export default function SignIn() {
 
       const data = response.data;
       if (data.message === "Success") {
+        login({ email, users_name }); 
         router.push("/adminPanel");
       } else {
         toast({
