@@ -1,5 +1,6 @@
 <?php
 require_once "connectDatabase.php";
+require_once 'tokenHelper.php';
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -22,11 +23,36 @@ function getCategoriesAndStatuses($pdo) {
     return ['categories' => $categories, 'statuses' => $statuses];
 }
 
-function addBook($pdo, $bookName, $authorName, $publicationYear, $description, $idcategory, $idstatus, $bookImage, $point) {
+function saveImage($imageFile) {
+    if ($imageFile['error'] !== UPLOAD_ERR_OK) {
+        throw new Exception('Dosya yükleme hatası.');
+    }
+
+    $validTypes = ['image/jpeg', 'image/png'];
+    if (!in_array($imageFile['type'], $validTypes)) {
+        throw new Exception('Geçersiz dosya tipi.');
+    }
+
+    $uniqueName = time() . '_' . md5(basename($imageFile['name'])) . '.png';
+    $targetPath = 'uploads/' . $uniqueName;
+    
+    if (move_uploaded_file($imageFile['tmp_name'], $targetPath)) {
+        return $uniqueName;
+    } else {
+        throw new Exception('Resim yükleme başarısız.');
+    }
+}
+
+function addBook($pdo, $userId, $bookName, $authorName, $publicationYear, $description, $category_id, $idstatus, $bookImage, $point,$publisher) {
     try {
-        $sql = "INSERT INTO books (books_name, writer, publication_year, description, idcategory, idstatus, book_image, point) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO books (userId, books_name, writer, publication_year, description, category_id, idstatus, book_image, point,publisher) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$bookName, $authorName, $publicationYear, $description, $idcategory, $idstatus, $bookImage, $point]);
+        $stmt->execute([$userId, $bookName, $authorName, $publicationYear, $description, $category_id, $idstatus, $bookImage, $point,$publisher]);
+
+        $sql2 = "UPDATE users SET point = COALESCE(point, 0) + 2 WHERE idusers = ?";
+        $stmt2 = $pdo->prepare($sql2);
+        $stmt2->execute([$userId]);
+
         echo "Kitap başarıyla eklendi.";
     } catch (PDOException $e) {
         echo "Kitap eklenirken bir hata oluştu: " . $e->getMessage();
@@ -34,25 +60,31 @@ function addBook($pdo, $bookName, $authorName, $publicationYear, $description, $
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $bookName = $_POST['bookName'] ?? '';
-    $authorName = $_POST['authorName'] ?? '';
-    $publicationYear = $_POST['publishYear'] ?? '';
-    $description = $_POST['description'] ?? '';
-    $idcategory = $_POST['category'] ?? '';
-    $idstatus = $_POST['status'] ?? '';
-    $bookImage = ''; 
-    $point = $_POST["point"] ?? '';
+    try {
+        $bookImage = saveImage($_FILES['bookImage']); 
+        $bookName = $_POST['bookName'] ?? '';
+        $authorName = $_POST['authorName'] ?? '';
+        $publicationYear = filter_var($_POST['publishYear'], FILTER_VALIDATE_INT);
+        $description = $_POST['description'] ?? '';
+        $category_id = filter_var($_POST['category'], FILTER_VALIDATE_INT);
+        $idstatus = filter_var($_POST['status'], FILTER_VALIDATE_INT);
+        $point = filter_var($_POST["point"], FILTER_VALIDATE_INT);
+        $publisher = $_POST['publisher'] ?? '';
 
-    $publicationYear = filter_var($publicationYear, FILTER_VALIDATE_INT);
-    $idcategory = filter_var($idcategory, FILTER_VALIDATE_INT);
-    $idstatus = filter_var($idstatus, FILTER_VALIDATE_INT);
-    $point = filter_var($point, FILTER_VALIDATE_INT);
+        if (!$publicationYear || !$category_id || !$idstatus || !$point) {
+            throw new Exception('Girilen verilerde bir hata var.');
+        }
 
-    if ($publicationYear && $idcategory && $idstatus && $point) {
-        addBook($pdo, $bookName, $authorName, $publicationYear, $description, $idcategory, $idstatus, $bookImage, $point);
-    } else {
-        echo "Girilen verilerde bir hata var.";
+        $userToken = tokenDecoder($_GET['authToken']);
+        if (!$userToken) {
+            throw new Exception('Geçersiz kullanıcı token.');
+        }
+
+        addBook($pdo, $userToken->data->idusers, $bookName, $authorName, $publicationYear, $description, $category_id, $idstatus, $bookImage, $point,$publisher);
+    } catch (Exception $e) {
+        echo $e->getMessage();
     }
 } else {
     echo json_encode(getCategoriesAndStatuses($pdo));
 }
+?>

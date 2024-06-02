@@ -1,5 +1,8 @@
 <?php
 require_once "connectDatabase.php";
+require_once 'vendor/autoload.php';
+require_once 'tokenHelper.php'; 
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -24,13 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($stmt->rowCount() == 1) {
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     $stored_password = $row['password'];
-                    if (password_verify($user_password, $stored_password)) { // Şifreleri doğrulama
-                        $_SESSION["idusers"] = $row['idusers'];
-                        $_SESSION["users_name"] = $row['users_name'];
-                        $_SESSION["email"] = $row['email'];
-                        $_SESSION["point"] = $row['point'];
-                        
-                        echo json_encode(["message" => "Success"]);
+                    if (password_verify($user_password, $stored_password)) {
+                        $jwt = tokenHelper($row['idusers'], $row['users_name'], $row['email']); 
+                        echo json_encode(["message" => "Success", "token" => $jwt]);
                     } else {
                         echo json_encode(["error" => "Incorrect password"]);
                     }

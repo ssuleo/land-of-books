@@ -18,7 +18,7 @@ export default function SignUp() {
   const toast = useToast();
 
   const handleSubmit = async (values, actions) => {
-    const { users_name, email, password } = values; 
+    const { users_name, email, password ,phone_number} = values; 
 
     try {
       const response = await axios({
@@ -28,12 +28,14 @@ export default function SignUp() {
           users_name,
           email,
           password,
+          phone_number
         },
         headers: {
           "Content-Type": "application/json", 
         },
       });
       const data = response.data;
+      console.log(data)
       if (data.message === "User successfully registered.") {
         toast({
           title: "Başarılı",
@@ -88,7 +90,7 @@ export default function SignUp() {
         </Flex>
 
         <Formik
-          initialValues={{ email: "", password: "", users_name: "" }}
+          initialValues={{ email: "", password: "", users_name: "" ,phone_number:""}}
          onSubmit={handleSubmit}
         >
           {(props) => (
@@ -114,6 +116,14 @@ export default function SignUp() {
                   <FormControl id="password" mt={4}>
                     <FormLabel>Password</FormLabel>
                     <Input {...field} type="password" />
+                  </FormControl>
+                )}
+              </Field>
+              <Field name="phone_number">
+                {({ field }) => (
+                  <FormControl id="phone_number" mt={4}>
+                    <FormLabel>Cep Telefonu</FormLabel>
+                    <Input {...field} type="phone_number" />
                   </FormControl>
                 )}
               </Field>

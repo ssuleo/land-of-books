@@ -16,9 +16,9 @@ import {
 import { Formik, Form, Field } from "formik";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useNavbar } from '../../context/NavbarContext';
+import { setCookie } from "../../components/Token";
+
 export default function SignIn() {
-  const { login } = useNavbar(); 
   const router = useRouter();
   const toast = useToast();
 
@@ -27,25 +27,27 @@ export default function SignIn() {
   };
 
   const handleSubmit = async (values, actions) => {
-    const { users_name, email, password } = values; 
+    const { users_name, email, password } = values;
 
     try {
       const response = await axios({
-        method: 'post',
+        method: "post",
         url: "http://localhost/land-of-books/backend/login.php",
         data: {
           users_name,
           email,
-          password,
+          password
         },
         headers: {
-          "Content-Type": "application/json", 
-        },
+          "Content-Type": "application/json"
+        }
       });
 
       const data = response.data;
-      if (data.message === "Success") {
-        login({ email, users_name }); 
+      console.log(data)
+      if (response.data.message === "Success") {
+        setCookie("authToken", response.data.token);
+        console.log(setCookie("authToken", response.data.token));
         router.push("/adminPanel");
       } else {
         toast({
@@ -53,19 +55,20 @@ export default function SignIn() {
           description: data.error || "An unknown error occurred.",
           status: "error",
           duration: 9000,
-          isClosable: true,
+          isClosable: true
         });
       }
     } catch (error) {
       console.error("Error during login:", error);
       toast({
         title: "An error occurred.",
-        description: error.response && error.response.data.error
-          ? error.response.data.error
-          : "Network error, please try again.",
+        description:
+          error.response && error.response.data.error
+            ? error.response.data.error
+            : "Network error, please try again.",
         status: "error",
         duration: 9000,
-        isClosable: true,
+        isClosable: true
       });
     } finally {
       actions.setSubmitting(false);

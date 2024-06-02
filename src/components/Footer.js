@@ -12,6 +12,7 @@ import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 const Footer = () => {
   return (
     <Box
+
       as="footer"
       width="full"
       py={5}

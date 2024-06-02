@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { removeCookie } from '../components/Token';
 
 const NavbarContext = createContext();
 
@@ -12,7 +13,7 @@ export const NavbarProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setUser(null); 
+    removeCookie('token');
   };
 
   return (

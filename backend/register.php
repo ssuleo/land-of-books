@@ -8,27 +8,30 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization');
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($data && isset($data['users_name'], $data['email'], $data['password'])) {
+    if ($data && isset($data['users_name'], $data['email'], $data['password'], $data['phone_number'])) {
         $username = $data['users_name'];
-        
         $email = $data['email'];
         $user_password = password_hash($data['password'], PASSWORD_DEFAULT); 
-
+        $phonenumber=$data['phone_number'];
 
         $checkSql = "SELECT * FROM users WHERE users_name = :username OR email = :email";
         $checkStmt = $pdo->prepare($checkSql);
         $checkStmt->bindParam(":username", $username, PDO::PARAM_STR);
         $checkStmt->bindParam(":email", $email, PDO::PARAM_STR);
         $checkStmt->execute();
+
         
         if ($checkStmt->rowCount() > 0) {
             echo json_encode(["error" => "Username or Email already exists."]);
         } else {
-            $sql = "INSERT INTO users (users_name, email, password) VALUES (:username, :email, :password)";
+            $sql = "INSERT INTO users (users_name, email, password,phone_number) VALUES (:username, :email, :password,:phonenumber)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(":username", $username, PDO::PARAM_STR);
             $stmt->bindParam(":email", $email, PDO::PARAM_STR);
             $stmt->bindParam(":password", $user_password, PDO::PARAM_STR);
+            $stmt->bindParam(":phonenumber", $phonenumber, PDO::PARAM_STR);
+
+
 
             if($stmt->execute()) {
                 echo json_encode(["message" => "User successfully registered."]);
