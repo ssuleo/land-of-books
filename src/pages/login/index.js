@@ -32,7 +32,7 @@ export default function SignIn() {
     try {
       const response = await axios({
         method: "post",
-        url: "http://localhost/land-of-books/backend/login.php",
+        url: "http://localhost/land-of-devices/backend/login.php",
         data: {
           users_name,
           email,

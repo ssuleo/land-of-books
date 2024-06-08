@@ -7,7 +7,7 @@ const DividerText = () => {
       <Center flexDirection="column" my={4}>
         <Divider />
         <Text fontWeight="600" fontSize="50"my={2}>
-          BOOKS
+          deviceS
         </Text>
 
         <Divider />

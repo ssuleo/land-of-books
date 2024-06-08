@@ -11,7 +11,7 @@ $userToken = tokenDecoder($_GET['authToken']);
 if(!empty($userToken)){
 
 
-    $sql = "SELECT * FROM `books` WHERE `userId` = :idusers";
+    $sql = "SELECT * FROM `devices` WHERE `userId` = :idusers";
     if ($stmt = $pdo->prepare($sql)) {
         $stmt->bindParam(":idusers", $userToken->data->idusers, PDO::PARAM_STR);
         if ($stmt->execute()) {

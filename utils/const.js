@@ -8,9 +8,9 @@ export const navigationBar = [
     path:"/myOffers"
   },
   {
-    title: "newBooks",
-    info: "Add New Books",
-    path:"/addBooks"
+    title: "newdevices",
+    info: "Add New devices",
+    path:"/addDevices"
   },
   // {
   //   title: "orders",
@@ -24,9 +24,9 @@ export const navigationBar = [
     disable: true
   },
   {
-    title: "bookdetail",
+    title: "devicedetail",
     info: "Kitap Detayları",
-    path:"/bookdetail",
+    path:"/devicedetail",
     disable: true
   },
   // {

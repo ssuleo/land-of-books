@@ -11,7 +11,7 @@ $search = @$_GET['search'];
 $userToken = tokenDecoder($_GET['authToken']);
 
 // SQL sorgusunu hazırlayın
-$sql = "SELECT * FROM `books`  WHERE (`books_name` LIKE :search  OR `writer` LIKE :search) AND `userId` != :idusers;";
+$sql = "SELECT * FROM `devices`  WHERE (`devices_name` LIKE :search  OR `writer` LIKE :search) AND `userId` != :idusers;";
 $stmt = $pdo->prepare($sql);
 
 

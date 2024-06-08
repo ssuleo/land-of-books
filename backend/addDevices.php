@@ -15,9 +15,9 @@ function getCategoriesAndStatuses($pdo) {
     }
 
     $statuses = [];
-    $statusQuery = $pdo->query("SELECT idstatus, book_status FROM status");
+    $statusQuery = $pdo->query("SELECT idstatus, device_status FROM status");
     while ($row = $statusQuery->fetch(PDO::FETCH_ASSOC)) {
-        $statuses[$row['idstatus']] = $row['book_status'];
+        $statuses[$row['idstatus']] = $row['device_status'];
     }
 
     return ['categories' => $categories, 'statuses' => $statuses];
@@ -43,11 +43,11 @@ function saveImage($imageFile) {
     }
 }
 
-function addBook($pdo, $userId, $bookName, $authorName, $publicationYear, $description, $category_id, $idstatus, $bookImage, $point,$publisher) {
+function adddevice($pdo, $userId, $deviceName, $authorName, $publicationYear, $description, $category_id, $idstatus, $deviceImage, $point,$publisher) {
     try {
-        $sql = "INSERT INTO books (userId, books_name, writer, publication_year, description, category_id, idstatus, book_image, point,publisher) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        $sql = "INSERT INTO devices (userId, devices_name, writer, publication_year, description, category_id, idstatus, device_image, point,publisher) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$userId, $bookName, $authorName, $publicationYear, $description, $category_id, $idstatus, $bookImage, $point,$publisher]);
+        $stmt->execute([$userId, $deviceName, $authorName, $publicationYear, $description, $category_id, $idstatus, $deviceImage, $point,$publisher]);
 
         $sql2 = "UPDATE users SET point = COALESCE(point, 0) + 2 WHERE idusers = ?";
         $stmt2 = $pdo->prepare($sql2);
@@ -61,8 +61,8 @@ function addBook($pdo, $userId, $bookName, $authorName, $publicationYear, $descr
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $bookImage = saveImage($_FILES['bookImage']); 
-        $bookName = $_POST['bookName'] ?? '';
+        $deviceImage = saveImage($_FILES['deviceImage']); 
+        $deviceName = $_POST['deviceName'] ?? '';
         $authorName = $_POST['authorName'] ?? '';
         $publicationYear = filter_var($_POST['publishYear'], FILTER_VALIDATE_INT);
         $description = $_POST['description'] ?? '';
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('Geçersiz kullanıcı token.');
         }
 
-        addBook($pdo, $userToken->data->idusers, $bookName, $authorName, $publicationYear, $description, $category_id, $idstatus, $bookImage, $point,$publisher);
+        adddevice($pdo, $userToken->data->idusers, $deviceName, $authorName, $publicationYear, $description, $category_id, $idstatus, $deviceImage, $point,$publisher);
     } catch (Exception $e) {
         echo $e->getMessage();
     }

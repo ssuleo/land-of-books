@@ -12,14 +12,14 @@ if (!empty($userToken)) {
     $query = $pdo->prepare("SELECT offers.*, 
     sender.users_name AS sender_name,
     user.users_name AS user_name,
-    senderBook.books_name AS senderBook_name,
-    senderBook.writer AS senderBook_author,
-    senderBook.point AS senderBook_point,
-    senderBook.book_image AS senderBook_image,
-    userBook.books_name AS userBook_name,
-    userBook.writer AS userBook_author,
-    userBook.point AS userBook_point,
-    userBook.book_image AS userBook_image,
+    senderdevice.devices_name AS senderdevice_name,
+    senderdevice.writer AS senderdevice_author,
+    senderdevice.point AS senderdevice_point,
+    senderdevice.device_image AS senderdevice_image,
+    userdevice.devices_name AS userdevice_name,
+    userdevice.writer AS userdevice_author,
+    userdevice.point AS userdevice_point,
+    userdevice.device_image AS userdevice_image,
     senderCargo.cargoNo AS senderCargoNo,
     userCargo.cargoNo AS userCargoNo,
     senderCargo.cargoStatus AS senderCargoStatus,
@@ -27,8 +27,8 @@ if (!empty($userToken)) {
 FROM offers
 LEFT JOIN users AS sender ON sender.idusers = offers.idsenders
 LEFT JOIN users AS user ON user.idusers = offers.idusers
-LEFT JOIN books AS senderBook ON senderBook.idbooks = offers.sendbooks
-LEFT JOIN books AS userBook ON userBook.idbooks = offers.idbooks
+LEFT JOIN devices AS senderdevice ON senderdevice.iddevices = offers.senddevices
+LEFT JOIN devices AS userdevice ON userdevice.iddevices = offers.iddevices
 LEFT JOIN cargo AS senderCargo ON senderCargo.id = offers.senderCargo
 LEFT JOIN cargo AS userCargo ON userCargo.id = offers.userCargo
 WHERE (offers.idusers = :userid OR offers.idsenders = :userid) 

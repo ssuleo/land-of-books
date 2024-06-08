@@ -12,21 +12,21 @@ if (!empty($userToken)) {
     $query = $pdo->prepare("SELECT offers.*, 
     user.users_name AS user_name, 
     sender.users_name AS sender_name,
-    userBook.books_name AS userBook_name,
-userBook.writer AS userBook_author,
-userBook.point AS userBook_point,
-    userBook.book_image AS userBook_image,
-    senderBook.books_name AS senderBook_name,
-senderBook.writer AS senderBook_author,
-senderBook.point AS senderBook_point,
-    senderBook.book_image AS senderBook_image,
+    userdevice.devices_name AS userdevice_name,
+userdevice.writer AS userdevice_author,
+userdevice.point AS userdevice_point,
+    userdevice.device_image AS userdevice_image,
+    senderdevice.devices_name AS senderdevice_name,
+senderdevice.writer AS senderdevice_author,
+senderdevice.point AS senderdevice_point,
+    senderdevice.device_image AS senderdevice_image,
 senderCargo.cargoNo AS senderCargoNo,
 userCargo.cargoNo AS userCargoNo
 FROM offers
 INNER JOIN users AS user ON user.idusers = offers.idusers
 INNER JOIN users AS sender ON sender.idusers = offers.idsenders
-INNER JOIN books AS userBook ON userBook.idbooks = offers.idbooks
-INNER JOIN books AS senderBook ON senderBook.idbooks = offers.sendbooks
+INNER JOIN devices AS userdevice ON userdevice.iddevices = offers.iddevices
+INNER JOIN devices AS senderdevice ON senderdevice.iddevices = offers.senddevices
 INNER JOIN cargo AS senderCargo ON senderCargo.id = offers.senderCargo
 INNER JOIN cargo AS userCargo ON userCargo.id = offers.userCargo
 WHERE  offers.idsenders = :userid

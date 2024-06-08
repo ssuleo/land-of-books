@@ -41,20 +41,20 @@ return (
                     <Image
                       boxSize="80px"
                       src={
-                        "http://localhost/land-of-books/backend/uploads/" +
-                        offer.senderBook_image
+                        "http://localhost/land-of-devices/backend/uploads/" +
+                        offer.senderdevice_image
                       }
-                      alt={`Cover of ${offer.senderBook_name}`}
+                      alt={`Cover of ${offer.senderdevice_name}`}
                     />
 
                     <Text fontWeight="bold">
                       Teklif Eden: {offer.sender_name}
                     </Text>
 
-                    <Text>{offer.senderBook_name}</Text>
-                    <Text>{offer.senderBook_author}</Text>
+                    <Text>{offer.senderdevice_name}</Text>
+                    <Text>{offer.senderdevice_author}</Text>
                     <Tag colorScheme="green" size="lg">
-                      Puan: {offer.senderBook_point}
+                      Puan: {offer.senderdevice_point}
                     </Tag>
                   </VStack>
                   <Box p={5} marginLeft="90px">
@@ -65,19 +65,19 @@ return (
                     <Image
                       boxSize="80px"
                       src={
-                        "http://localhost/land-of-books/backend/uploads/" +
-                        offer.userBook_image
+                        "http://localhost/land-of-devices/backend/uploads/" +
+                        offer.userdevice_image
                       }
-                      alt={`Cover of ${offer.userBook_name}`}
+                      alt={`Cover of ${offer.userdevice_name}`}
                     />
                     <Text fontWeight="bold">
                       Teklif Alıcı: {offer.user_name}
                     </Text>
 
-                    <Text>{offer.userBook_name}</Text>
-                    <Text>{offer.userBook_author}</Text>
+                    <Text>{offer.userdevice_name}</Text>
+                    <Text>{offer.userdevice_author}</Text>
                     <Tag colorScheme="red" size="lg">
-                      Puan: {offer.userBook_point}
+                      Puan: {offer.userdevice_point}
                     </Tag>
                   </VStack>
                 </Flex>
@@ -89,16 +89,16 @@ return (
         <AccordionPanel pb={4}>
           {!offer.status ? (
             <>
-              {offer.idbooks == null ? (
+              {offer.iddevices == null ? (
                 <>
-                  <form onSubmit={handelSetBook}>
+                  <form onSubmit={handelSetdevice}>
                     Lütfen kitap seçiniz
-                    <Select mb={5} name="selectbook" isRequired>
+                    <Select mb={5} name="selectdevice" isRequired>
                       <option value="">Kitap Seçiniz</option>
-                      {dataBook &&
-                        dataBook.map((item) => (
-                          <option value={item.idbooks}>
-                            {item.books_name}
+                      {datadevice &&
+                        datadevice.map((item) => (
+                          <option value={item.iddevices}>
+                            {item.devices_name}
                           </option>
                         ))}
                     </Select>

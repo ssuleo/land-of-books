@@ -8,7 +8,7 @@ function MyCargoComp() {
 
   const searchGet = async () => {
     const response = await fetch(
-      `http://localhost/land-of-books/backend/page/get/getCargoOffer.php?authToken=${getCookie(
+      `http://localhost/land-of-devices/backend/page/get/getCargoOffer.php?authToken=${getCookie(
         "authToken"
       )}`
     );

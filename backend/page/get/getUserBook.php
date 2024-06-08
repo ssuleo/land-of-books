@@ -10,7 +10,7 @@ $userId = $_GET['userId'];
 
 
 if(!empty($userId)){
-    $query = "SELECT * FROM books WHERE userId = :userId";
+    $query = "SELECT * FROM devices WHERE userId = :userId";
 
     $stmt = $pdo->prepare($query);
 
@@ -18,11 +18,11 @@ if(!empty($userId)){
 
     $stmt->execute();
 
-    $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode([
         "status" => 1,
-        "data" => $books
+        "data" => $devices
     ]);
 }else{
     echo json_encode([

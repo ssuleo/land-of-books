@@ -8,13 +8,13 @@ import {
   Badge
 } from "@chakra-ui/react";
 
-const BookCard = ({
+const deviceCard = ({
   title,
   author,
   points,
   timestamp,
   avatarImage,
-  bookImage,
+  deviceImage,
   publisher
 }) => {
   return (
@@ -29,7 +29,7 @@ const BookCard = ({
         m={2}
       >
         <Image
-          src={"http://localhost/land-of-books/backend/uploads/" + bookImage}
+          src={"http://localhost/land-of-devices/backend/uploads/" + deviceImage}
           alt={`Cover image for ${title}`}
           w="100%"
           h="60%"
@@ -62,4 +62,4 @@ const BookCard = ({
   );
 };
 
-export default BookCard;
+export default deviceCard;

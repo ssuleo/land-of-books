@@ -5,15 +5,15 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-if (isset($_POST['selectbook']) && isset($_GET['offerId'])) {
+if (isset($_POST['selectdevice']) && isset($_GET['offerId'])) {
 
-    $selectbook = $_POST['selectbook'];
+    $selectdevice = $_POST['selectdevice'];
     $offerId = $_GET['offerId'];
 
-    $sql = "UPDATE offers SET idbooks = :selectbook WHERE idoffers = :offerId";
+    $sql = "UPDATE offers SET iddevices = :selectdevice WHERE idoffers = :offerId";
     $stmt = $pdo->prepare($sql);
 
-    $stmt->bindParam(':selectbook', $selectbook);
+    $stmt->bindParam(':selectdevice', $selectdevice);
     $stmt->bindParam(':offerId', $offerId);
 
     if ($stmt->execute()) {

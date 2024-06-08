@@ -10,7 +10,7 @@ function Offers() {
 
   const getOffer = async () => {
     const response = await axios.get(
-      "http://localhost/land-of-books/backend/page/get/getOffer.php?authToken=" +
+      "http://localhost/land-of-devices/backend/page/get/getOffer.php?authToken=" +
         getCookie("authToken")
     );
     console.log(response.data);

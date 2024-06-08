@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { getCookie } from "./Token";
 
-function AddBook() {
+function Adddevice() {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -27,7 +27,7 @@ function AddBook() {
       try {
         // API endpoint'inizi buraya yazın.
         const response = await axios.get(
-          "http://localhost/land-of-books/backend/addBooks.php"
+          "http://localhost/land-of-devices/backend/addDevices.php"
         );
 
         setCategories(Object.entries(response.data.categories));
@@ -59,7 +59,7 @@ function AddBook() {
     try {
       // PHP API endpoint'inizi buraya yazın.
       const response = await axios.post(
-        "http://localhost/land-of-books/backend/addBooks.php?authToken=" +
+        "http://localhost/land-of-devices/backend/addDevices.php?authToken=" +
           getCookie("authToken"),
         formData,
         {
@@ -94,10 +94,10 @@ function AddBook() {
         <VStack spacing={4} align="stretch">
           <Flex>
             <FormControl isRequired>
-              <FormLabel htmlFor="bookName">Kitap Adı</FormLabel>
+              <FormLabel htmlFor="deviceName">Kitap Adı</FormLabel>
               <Input
-                id="bookName"
-                name="bookName"
+                id="deviceName"
+                name="deviceName"
                 placeholder="Kitap adını giriniz"
               />
             </FormControl>
@@ -165,10 +165,10 @@ function AddBook() {
             />
           </FormControl>
           <FormControl isRequired>
-            <FormLabel htmlFor="bookImage">Kitap Kapak Resmi</FormLabel>
+            <FormLabel htmlFor="deviceImage">Kitap Kapak Resmi</FormLabel>
             <Input
-              id="bookImage"
-              name="bookImage"
+              id="deviceImage"
+              name="deviceImage"
               type="file"
               accept="image/*"
             />
@@ -188,4 +188,4 @@ function AddBook() {
   );
 }
 
-export default AddBook;
+export default Adddevice;

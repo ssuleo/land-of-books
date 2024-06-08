@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 
-$query = $pdo->prepare("SELECT books.books_name, users.users_name, books.point, books.book_image ,books.description ,books.publisher FROM books INNER JOIN users ON books.userId = users.idusers");
+$query = $pdo->prepare("SELECT devices.devices_name, users.users_name, devices.point, devices.device_image ,devices.description ,devices.publisher FROM devices INNER JOIN users ON devices.userId = users.idusers");
 $query->execute();
 
 echo json_encode([

@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'land_of_books'; 
+$dbname = 'land_of_devices'; 
 $username = 'root'; 
 $password = 'Sulee2001.';
 

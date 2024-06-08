@@ -7,7 +7,7 @@ import {
   HStack,
   Icon,
 } from "@chakra-ui/react";
-import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
+import { FaInstagram, FaFacedevice, FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -28,7 +28,7 @@ const Footer = () => {
           <HStack spacing={4}>
             <Link href="/contact">Contact Us</Link>
             <Text>|</Text>
-            <Link href="/about">About Bookswap</Link>
+            <Link href="/about">About deviceswap</Link>
             <Text>|</Text>
             <Link href="/terms">Terms & Conditions</Link>
             <Text>|</Text>
@@ -38,14 +38,14 @@ const Footer = () => {
             <Link href="https://instagram.com" isExternal>
               <Icon as={FaInstagram} />
             </Link>
-            <Link href="https://facebook.com" isExternal>
-              <Icon as={FaFacebook} />
+            <Link href="https://facedevice.com" isExternal>
+              <Icon as={FaFacedevice} />
             </Link>
             <Link href="https://tiktok.com" isExternal>
               <Icon as={FaTiktok} />
             </Link>
           </HStack>
-          <Text>Copyright © 2023 Bookswap Ltd</Text>
+          <Text>Copyright © 2023 deviceswap Ltd</Text>
         </Stack>
       </Container>
     </Box>

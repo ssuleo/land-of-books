@@ -23,7 +23,7 @@ const index = () => {
     console.log(query)
 
     const searchGet = async () => {
-        const response = await fetch(`http://localhost/land-of-books/backend/page/getSearch.php?search=${query.s}&authToken=${getCookie("authToken")}`);
+        const response = await fetch(`http://localhost/land-of-devices/backend/page/getSearch.php?search=${query.s}&authToken=${getCookie("authToken")}`);
         const data = await response.json();
         console.log(data);
         setData(data)
@@ -46,16 +46,16 @@ const index = () => {
                     {/* Yan yana 3 kitap kartı */}
                     <SimpleGrid columns={4} spacing={4}>
                         {data ? (
-                            data.map((book) => (
-                                <Card key={book.idbooks} boxShadow="md" borderRadius="md" p={4} onClick={() => router.push("/bookdetail?book="+book.idbooks)}>
+                            data.map((device) => (
+                                <Card key={device.iddevices} boxShadow="md" borderRadius="md" p={4} onClick={() => router.push("/devicedetail?device="+device.iddevices)}>
                                     <Image
-                                        src={"http://localhost/land-of-books/backend/uploads/" + book.book_image}
-                                        alt={book.books_name}
+                                        src={"http://localhost/land-of-devices/backend/uploads/" + device.device_image}
+                                        alt={device.devices_name}
                                         borderRadius="md"
                                         mb={2}
                                     />
-                                    <Text fontWeight="bold">{book.books_name}</Text>
-                                    <Text>Puan: {book.point}</Text>
+                                    <Text fontWeight="bold">{device.devices_name}</Text>
+                                    <Text>Puan: {device.point}</Text>
                                 </Card>
                             ))
                         ) : null}

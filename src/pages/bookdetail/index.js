@@ -37,14 +37,14 @@ const index = () => {
   const query = router.query;
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [bookData, setBookData] = useState(null);
+  const [deviceData, setdeviceData] = useState(null);
 
   console.log(query);
 
-  const bookFetch = async () => {
+  const deviceFetch = async () => {
     const response = await fetch(
-      `http://localhost/land-of-books/backend/page/fetchBook.php?book=${
-        query.book
+      `http://localhost/land-of-devices/backend/page/fetchdevice.php?device=${
+        query.device
       }&authToken=${getCookie("authToken")}`
     );
     const data = await response.json();
@@ -55,22 +55,22 @@ const index = () => {
     setData(data);
   };
 
-  const getBook = async () => {
+  const getdevice = async () => {
     const response = await axios.get(
-      "http://localhost/land-of-books/backend/page/getBook.php?authToken=" +
+      "http://localhost/land-of-devices/backend/page/getdevice.php?authToken=" +
         getCookie("authToken")
     );
-    setBookData(response.data);
+    setdeviceData(response.data);
     console.log(response.data);
   };
 
   useEffect(() => {
-    if (!query.book) {
+    if (!query.device) {
       router.push("/adminPanel");
     }
 
-    bookFetch();
-    getBook();
+    deviceFetch();
+    getdevice();
   }, [query]);
 
   const handleSubmit = async (e) => {
@@ -79,12 +79,12 @@ const index = () => {
     setIsLoading(true);
 
     const formData = new FormData(e.target);
-    formData.append("book", query.book);
+    formData.append("device", query.device);
 
     try {
       // PHP API endpoint'inizi buraya yazın.
       const response = await axios.post(
-        "http://localhost/land-of-books/backend/page/add/addSwap.php?authToken=" +
+        "http://localhost/land-of-devices/backend/page/add/addSwap.php?authToken=" +
           getCookie("authToken"),
         formData,
         {
@@ -132,17 +132,17 @@ const index = () => {
       <Box minH={"75vh"}>
         <Flex>
           <NavigationBar />
-          {data && bookData ? (
+          {data && deviceData ? (
             <form onSubmit={handleSubmit}>
               <VStack spacing={4} align="stretch" p={10}>
                 <Flex shadow={"md"}>
                   <Box p={5}>
                     <Image
                       src={
-                        "http://localhost/land-of-books/backend/uploads/" +
-                        data.book_image
+                        "http://localhost/land-of-devices/backend/uploads/" +
+                        data.device_image
                       }
-                      alt={data.books_name}
+                      alt={data.devices_name}
                       borderRadius="md"
                       mb={2}
                       width="200px"
@@ -151,8 +151,8 @@ const index = () => {
                   <Box p={5}>
                     <Flex>
                       <FormControl ml="20px">
-                        <FormLabel htmlFor="bookName">Kitap Adı</FormLabel>
-                        {data.books_name}
+                        <FormLabel htmlFor="deviceName">Kitap Adı</FormLabel>
+                        {data.devices_name}
                       </FormControl>
                       <FormControl ml="20px">
                         <FormLabel htmlFor="authorName">Yazar Adı</FormLabel>

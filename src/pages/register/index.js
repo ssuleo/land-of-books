@@ -23,7 +23,7 @@ export default function SignUp() {
     try {
       const response = await axios({
         method: 'post',
-        url: "http://localhost/land-of-books/backend/register.php",
+        url: "http://localhost/land-of-devices/backend/register.php",
         data: {
           users_name,
           email,

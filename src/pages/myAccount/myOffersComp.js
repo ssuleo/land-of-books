@@ -8,7 +8,7 @@ function MyOffersComp() {
 
   const searchGet = async () => {
     const response = await fetch(
-      `http://localhost/land-of-books/backend/page/get/getOffer.php?authToken=${getCookie(
+      `http://localhost/land-of-devices/backend/page/get/getOffer.php?authToken=${getCookie(
         "authToken"
       )}`
     );

@@ -30,7 +30,7 @@ const Navbar = () => {
           src={"images/logoiki.png"}
           w="150px"
           h="100px"
-          alt="BookSwap Logo"
+          alt="deviceSwap Logo"
           cursor="pointer"
         />
         <InputGroup w="800px">

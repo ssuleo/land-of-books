@@ -46,7 +46,7 @@ const AdminNavbar = () => {
           src={"images/logoiki.png"}
           w="150px"
           h="100px"
-          alt="BookSwap Logo"
+          alt="deviceSwap Logo"
           cursor="pointer"
           onClick={() => router.push("/adminPanel")}
         />

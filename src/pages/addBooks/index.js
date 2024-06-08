@@ -1,7 +1,7 @@
 import React from "react";
 import AdminNavbar from "../../components/AdminNavbar"
 import Footer from "../../components/Footer"
-import AddBook from "../../components/AddBook"
+import Adddevice from "../../components/Adddevice"
 import NavigationBar from "../../components/NavigationBar"
 import { Box, Flex } from "@chakra-ui/react";
 
@@ -18,7 +18,7 @@ const index = () => {
         <AdminNavbar />
         <Flex flexDirection={{ base: "column", md: "row" }}>
           <NavigationBar />
-          <AddBook />
+          <Adddevice />
         </Flex>
     
       <Footer />

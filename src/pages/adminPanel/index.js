@@ -16,35 +16,35 @@ import axios from "axios";
 import { getCookie } from "../../components/Token";
 const AdminPanel = () => {
   const [userData, setUserData] = useState(null);
-  const [bookData, setBookData] = useState(null);
+  const [deviceData, setdeviceData] = useState(null);
 
   const getUser = async () => {
     const response = await axios.get(
-      "http://localhost/land-of-books/backend/page/getUser.php?authToken=" +
+      "http://localhost/land-of-devices/backend/page/getUser.php?authToken=" +
         getCookie("authToken")
     );
     setUserData(response.data);
   };
 
-  const getBook = async () => {
+  const getdevice = async () => {
     const response = await axios.get(
-      "http://localhost/land-of-books/backend/page/getBook.php?authToken=" +
+      "http://localhost/land-of-devices/backend/page/getdevice.php?authToken=" +
         getCookie("authToken")
     );
-    setBookData(response.data);
+    setdeviceData(response.data);
     console.log(response.data);
   };
 
   useEffect(() => {
     getUser();
-    getBook();
+    getdevice();
   }, []);
 
   return (
     <>
       <AdminNavbar />
 
-      {userData && bookData ? (
+      {userData && deviceData ? (
         <ChakraProvider>
           <Flex minH={"75vh"} flexDirection={{ base: "column", md: "row" }}>
             {/* NavigationBar bölümü */}
@@ -83,25 +83,25 @@ const AdminPanel = () => {
                   columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
                   spacing={4}
                 >
-                  {bookData.map((book) => (
+                  {deviceData.map((device) => (
                     <Card
-                      key={book.idbooks}
+                      key={device.iddevices}
                       boxShadow="md"
                       borderRadius="md"
                       p={4}
                     >
                       <Image
                         src={
-                          "http://localhost/land-of-books/backend/uploads/" +
-                          book.book_image
+                          "http://localhost/land-of-devices/backend/uploads/" +
+                          device.device_image
                         }
-                        alt={book.books_name}
+                        alt={device.devices_name}
                         borderRadius="md"
                         mb={2}
                       />
-                      <Text fontWeight="bold">{book.books_name}</Text>
-                      <Text>{book.publisher}</Text>
-                      <Text>Puan: {book.point}</Text>
+                      <Text fontWeight="bold">{device.devices_name}</Text>
+                      <Text>{device.publisher}</Text>
+                      <Text>Puan: {device.point}</Text>
                     </Card>
                   ))}
                 </SimpleGrid>

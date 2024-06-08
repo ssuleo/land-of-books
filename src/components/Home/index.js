@@ -1,5 +1,5 @@
 import Footer from "../Footer";
-import BookCard from "../BookCard";
+import deviceCard from "../deviceCard";
 import Body from "../Body";
 import Navbar from "../Navbar";
 import React, { useEffect, useState } from "react";
@@ -8,12 +8,12 @@ import { Box, Grid } from "@chakra-ui/react";
 import axios from "axios";
 
 const home = () => {
-  const [dataBooks, setDataBooks] = useState(null);
+  const [datadevices, setDatadevices] = useState(null);
   const data = async () => {
     let response = await axios.get(
-      "http://localhost/land-of-books/backend/page/get/getBooksAll.php"
+      "http://localhost/land-of-devices/backend/page/get/getdevicesAll.php"
     );
-    setDataBooks(response.data.data);
+    setDatadevices(response.data.data);
     console.log(response.data.data);
   };
   useEffect(() => {
@@ -26,16 +26,16 @@ const home = () => {
       <Body />
       <DividerText />
       <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-        {dataBooks &&
-          dataBooks.map((book, key) => {
+        {datadevices &&
+          datadevices.map((device, key) => {
             return (
-              <BookCard
+              <deviceCard
                 key={key}
-                title={book.books_name}
-                author={book.users_name}
-                points={book.point}
-                bookImage={book.book_image}
-                publisher={book.publisher}
+                title={device.devices_name}
+                author={device.users_name}
+                points={device.point}
+                deviceImage={device.device_image}
+                publisher={device.publisher}
 
               />
             );
