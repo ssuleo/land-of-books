@@ -92,9 +92,9 @@ return (
               {offer.iddevices == null ? (
                 <>
                   <form onSubmit={handelSetdevice}>
-                    Lütfen kitap seçiniz
+                    Lütfen Cihaz seçiniz
                     <Select mb={5} name="selectdevice" isRequired>
-                      <option value="">Kitap Seçiniz</option>
+                      <option value="">Cihaz Seçiniz</option>
                       {datadevice &&
                         datadevice.map((item) => (
                           <option value={item.iddevices}>

@@ -43,19 +43,19 @@ function saveImage($imageFile) {
     }
 }
 
-function adddevice($pdo, $userId, $deviceName, $authorName, $publicationYear, $description, $category_id, $idstatus, $deviceImage, $point,$publisher) {
+function adddevice($pdo, $userId, $deviceName, $authorName, $year, $description, $category_id, $idstatus, $deviceImage, $point,$brand) {
     try {
-        $sql = "INSERT INTO devices (userId, devices_name, writer, publication_year, description, category_id, idstatus, device_image, point,publisher) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        $sql = "INSERT INTO devices (userId, devices_name, model, year, description, category_id, idstatus, device_image, point,brand) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$userId, $deviceName, $authorName, $publicationYear, $description, $category_id, $idstatus, $deviceImage, $point,$publisher]);
+        $stmt->execute([$userId, $deviceName, $authorName, $year, $description, $category_id, $idstatus, $deviceImage, $point,$brand]);
 
         $sql2 = "UPDATE users SET point = COALESCE(point, 0) + 2 WHERE idusers = ?";
         $stmt2 = $pdo->prepare($sql2);
         $stmt2->execute([$userId]);
 
-        echo "Kitap başarıyla eklendi.";
+        echo "Cihaz başarıyla eklendi.";
     } catch (PDOException $e) {
-        echo "Kitap eklenirken bir hata oluştu: " . $e->getMessage();
+        echo "Cihaz eklenirken bir hata oluştu: " . $e->getMessage();
     }
 }
 
@@ -64,14 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $deviceImage = saveImage($_FILES['deviceImage']); 
         $deviceName = $_POST['deviceName'] ?? '';
         $authorName = $_POST['authorName'] ?? '';
-        $publicationYear = filter_var($_POST['publishYear'], FILTER_VALIDATE_INT);
+        $year = filter_var($_POST['publishYear'], FILTER_VALIDATE_INT);
         $description = $_POST['description'] ?? '';
         $category_id = filter_var($_POST['category'], FILTER_VALIDATE_INT);
         $idstatus = filter_var($_POST['status'], FILTER_VALIDATE_INT);
         $point = filter_var($_POST["point"], FILTER_VALIDATE_INT);
-        $publisher = $_POST['publisher'] ?? '';
+        $brand = $_POST['brand'] ?? '';
 
-        if (!$publicationYear || !$category_id || !$idstatus || !$point) {
+        if (!$year || !$category_id || !$idstatus || !$point) {
             throw new Exception('Girilen verilerde bir hata var.');
         }
 
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('Geçersiz kullanıcı token.');
         }
 
-        adddevice($pdo, $userToken->data->idusers, $deviceName, $authorName, $publicationYear, $description, $category_id, $idstatus, $deviceImage, $point,$publisher);
+        adddevice($pdo, $userToken->data->idusers, $deviceName, $authorName, $year, $description, $category_id, $idstatus, $deviceImage, $point,$brand);
     } catch (Exception $e) {
         echo $e->getMessage();
     }

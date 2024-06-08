@@ -42,8 +42,8 @@ const index = () => {
             <Flex minH={"75vh"}>
                 <NavigationBar />
                 <Box p={10}>
-                    <Text fontSize="xl" mb={2}>Kitaplar</Text>
-                    {/* Yan yana 3 kitap kartı */}
+                    <Text fontSize="xl" mb={2}>Cihazlar</Text>
+                    {/* Yan yana 3 Cihaz kartı */}
                     <SimpleGrid columns={4} spacing={4}>
                         {data ? (
                             data.map((device) => (

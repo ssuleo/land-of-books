@@ -442,7 +442,7 @@ function OffersItem({ initialOffer, userId }) {
           iddevices: 1
         }));
         toast({
-          title: "Kitap eklendi.",
+          title: "Cihaz eklendi.",
           description: response.data.message,
           status: "success",
           duration: 5000,
@@ -450,7 +450,7 @@ function OffersItem({ initialOffer, userId }) {
         });
       } catch (error) {
         toast({
-          title: "Kitap eklenemedi.",
+          title: "Cihaz eklenemedi.",
           description: error.message,
           status: "error",
           duration: 5000,
@@ -553,9 +553,9 @@ function OffersItem({ initialOffer, userId }) {
                 {offer.iddevices == null ? (
                   <>
                     <form onSubmit={handelSetdevice}>
-                      Lütfen kitap seçiniz
+                      Lütfen Cihaz seçiniz
                       <Select mb={5} name="selectdevice" isRequired>
-                        <option value="">Kitap Seçiniz</option>
+                        <option value="">Cihaz Seçiniz</option>
                         {datadevice &&
                           datadevice.map((item) => (
                             <option value={item.iddevices}>

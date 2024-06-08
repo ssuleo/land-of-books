@@ -96,7 +96,7 @@ const index = () => {
 
       if (response.data.status) {
         toast({
-          title: "Kitap eklendi.",
+          title: "Cihaz eklendi.",
           description: response.data.message,
           status: "success",
           duration: 5000,
@@ -106,7 +106,7 @@ const index = () => {
         router.push("/myOffers");
       } else {
         toast({
-          title: "Kitap eklenemedi.",
+          title: "Cihaz eklenemedi.",
           description: JSON.stringify(response.data),
           status: "error",
           duration: 5000,
@@ -115,7 +115,7 @@ const index = () => {
       }
     } catch (error) {
       toast({
-        title: "Kitap eklenemedi.",
+        title: "Cihaz eklenemedi.",
         description: error.message,
         status: "error",
         duration: 5000,
@@ -151,17 +151,17 @@ const index = () => {
                   <Box p={5}>
                     <Flex>
                       <FormControl ml="20px">
-                        <FormLabel htmlFor="deviceName">Kitap Adı</FormLabel>
+                        <FormLabel htmlFor="deviceName">Cihaz Adı</FormLabel>
                         {data.devices_name}
                       </FormControl>
                       <FormControl ml="20px">
                         <FormLabel htmlFor="authorName">Yazar Adı</FormLabel>
-                        {data.writer}
+                        {data.model}
                       </FormControl>
                     </Flex>
                     <FormControl ml="20px">
                       <FormLabel htmlFor="publishYear">Yayın Yılı</FormLabel>
-                      {data.publication_year}
+                      {data.year}
                     </FormControl>
                   </Box>
                   <Box p={5}>
@@ -171,7 +171,7 @@ const index = () => {
                         id="adress"
                         name="adress"
                         w="600px"
-                        placeholder="Kitapın gönderileceği adresi giriniz."
+                        placeholder="Cihazın gönderileceği adresi giriniz."
                       />
                     </FormControl>
                     <FormControl ml="20px">

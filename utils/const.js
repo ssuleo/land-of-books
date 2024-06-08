@@ -25,7 +25,7 @@ export const navigationBar = [
   },
   {
     title: "devicedetail",
-    info: "Kitap Detayları",
+    info: "Cihaz Detayları",
     path:"/devicedetail",
     disable: true
   },

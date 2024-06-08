@@ -35,7 +35,7 @@ const home = () => {
                 author={device.users_name}
                 points={device.point}
                 deviceImage={device.device_image}
-                publisher={device.publisher}
+                brand={device.brand}
 
               />
             );

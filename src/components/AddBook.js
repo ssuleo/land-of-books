@@ -69,7 +69,7 @@ function Adddevice() {
         }
       );
       toast({
-        title: "Kitap eklendi.",
+        title: "Cihaz eklendi.",
         description: response.data,
         status: "success",
         duration: 5000,
@@ -77,7 +77,7 @@ function Adddevice() {
       });
     } catch (error) {
       toast({
-        title: "Kitap eklenemedi.",
+        title: "Cihaz eklenemedi.",
         description: error.message,
         status: "error",
         duration: 5000,
@@ -94,11 +94,11 @@ function Adddevice() {
         <VStack spacing={4} align="stretch">
           <Flex>
             <FormControl isRequired>
-              <FormLabel htmlFor="deviceName">Kitap Adı</FormLabel>
+              <FormLabel htmlFor="deviceName">Cihaz Adı</FormLabel>
               <Input
                 id="deviceName"
                 name="deviceName"
-                placeholder="Kitap adını giriniz"
+                placeholder="Cihaz adını giriniz"
               />
             </FormControl>
             <FormControl pl={1} isRequired>
@@ -120,7 +120,7 @@ function Adddevice() {
             />
           </FormControl>
           <FormControl isRequired>
-            <FormLabel htmlFor="category">Kitap Kategorisi</FormLabel>
+            <FormLabel htmlFor="category">Cihaz Kategorisi</FormLabel>
             <Select
               id="category"
               name="category"
@@ -134,7 +134,7 @@ function Adddevice() {
             </Select>
           </FormControl>
           <FormControl isRequired>
-            <FormLabel htmlFor="condition">Kitap Durumu</FormLabel>
+            <FormLabel htmlFor="condition">Cihaz Durumu</FormLabel>
             <Select id="status" name="status" placeholder="Durum seçiniz">
               {statuses.map(([id, name]) => (
                 <option key={id} value={id}>
@@ -153,19 +153,19 @@ function Adddevice() {
             />
           </FormControl>
           <FormControl isRequired>
-            <FormLabel htmlFor="publisher">Yayın Evi</FormLabel>
-            <Input id="publisher" name="publisher" placeholder="Yayın evi giriniz" />
+            <FormLabel htmlFor="brand">Yayın Evi</FormLabel>
+            <Input id="brand" name="brand" placeholder="Yayın evi giriniz" />
           </FormControl>
           <FormControl isRequired>
             <FormLabel htmlFor="description">Kısa Açıklama</FormLabel>
             <Textarea
               id="description"
               name="description"
-              placeholder="Kitap hakkında kısa bir açıklama giriniz"
+              placeholder="Cihaz hakkında kısa bir açıklama giriniz"
             />
           </FormControl>
           <FormControl isRequired>
-            <FormLabel htmlFor="deviceImage">Kitap Kapak Resmi</FormLabel>
+            <FormLabel htmlFor="deviceImage">Cihaz Kapak Resmi</FormLabel>
             <Input
               id="deviceImage"
               name="deviceImage"
@@ -180,7 +180,7 @@ function Adddevice() {
             color="white"
             isLoading={isLoading}
           >
-            Kitap Ekle
+            Cihaz Ekle
           </Button>
         </VStack>
       </form>

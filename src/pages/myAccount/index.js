@@ -20,7 +20,7 @@ const index = () => {
           <TabList mb='1em'>
             <Tab>Teklif Verdiklerim</Tab>
     
-            <Tab>Kargoda Olan Kitaplar</Tab>
+            <Tab>Kargoda Olan Cihazlar</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>

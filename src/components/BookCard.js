@@ -15,7 +15,7 @@ const deviceCard = ({
   timestamp,
   avatarImage,
   deviceImage,
-  publisher
+  brand
 }) => {
   return (
     <>
@@ -51,7 +51,7 @@ const deviceCard = ({
               <Badge>{points} points</Badge>
               
             </HStack>
-            <Badge>{publisher} </Badge>
+            <Badge>{brand} </Badge>
             <Text color="gray.500" fontSize="sm">
               {timestamp}
             </Text>

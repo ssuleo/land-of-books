@@ -73,12 +73,12 @@ const AdminPanel = () => {
                 </Text>
               </Box>
 
-              {/* Kitaplar bölümü */}
+              {/* Cihazlar bölümü */}
               <Box>
                 <Text fontSize="xl" mb={2}>
-                  Kitapların
+                  Cihazların
                 </Text>
-                {/* Yan yana 3 kitap kartı */}
+                {/* Yan yana 3 Cihaz kartı */}
                 <SimpleGrid
                   columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
                   spacing={4}
@@ -100,7 +100,7 @@ const AdminPanel = () => {
                         mb={2}
                       />
                       <Text fontWeight="bold">{device.devices_name}</Text>
-                      <Text>{device.publisher}</Text>
+                      <Text>{device.brand}</Text>
                       <Text>Puan: {device.point}</Text>
                     </Card>
                   ))}
