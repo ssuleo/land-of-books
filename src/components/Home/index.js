@@ -1,5 +1,5 @@
 import Footer from "../Footer";
-import deviceCard from "../deviceCard";
+import DeviceCard from "../DeviceCard";
 import Body from "../Body";
 import Navbar from "../Navbar";
 import React, { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ const home = () => {
   const [datadevices, setDatadevices] = useState(null);
   const data = async () => {
     let response = await axios.get(
-      "http://localhost/land-of-devices/backend/page/get/getdevicesAll.php"
+      "http://localhost/land-of-devices/backend/page/get/getDevicesAll.php"
     );
     setDatadevices(response.data.data);
     console.log(response.data.data);
@@ -29,14 +29,13 @@ const home = () => {
         {datadevices &&
           datadevices.map((device, key) => {
             return (
-              <deviceCard
+              <DeviceCard
                 key={key}
                 title={device.devices_name}
                 author={device.users_name}
                 points={device.point}
                 deviceImage={device.device_image}
                 brand={device.brand}
-
               />
             );
           })}{" "}
